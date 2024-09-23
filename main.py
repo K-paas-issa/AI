@@ -43,3 +43,8 @@ with pm.Model() as ar1:
     )
 
     idata = pm.sample(1000, tune=2000, random_seed=RANDOM_SEED)
+
+with ar1:
+    predictions = pm.sample_posterior_predictive(idata, predictions=True).predictions
+
+np.savetxt('sample.csv',predictions.y,delimiter=",")
