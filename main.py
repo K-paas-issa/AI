@@ -47,4 +47,4 @@ with pm.Model() as ar1:
 with ar1:
     predictions = pm.sample_posterior_predictive(idata, predictions=True).predictions
 
-np.savetxt('sample.csv',predictions.y,delimiter=",")
+np.savetxt('sample.csv',predictions.y[0],delimiter=",")
