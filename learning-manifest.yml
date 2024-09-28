@@ -31,3 +31,17 @@ spec:
                   key: ncp-secret-key
       imagePullSecrets:
         - name: regcred
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-learning-server-service
+spec:
+  selector:
+    app: my-learning-server
+  ports:
+    - protocol: TCP
+      port: 8002
+      targetPort: 8002
+  type: ClusterIP  # 클러스터 내에서만 접근 가능
