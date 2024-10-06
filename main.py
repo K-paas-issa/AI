@@ -6,6 +6,7 @@ from pathlib import Path
 import pickle
 from collections import OrderedDict
 import pandas as pd
+import datetime as dt
 
 import numpy as np
 try:
@@ -31,9 +32,9 @@ import matplotlib.cm as cm
 import seaborn as sns
 from collections import Counter
 import numpy as np
-def main2():
+def main2(ai_input_data):
     RANDOM_SEED=42
-    data=np.load('data.npy')
+    data=np.load(ai_input_data)
     df_special = pd.DataFrame(data)
     with pm.Model() as ar1:
     # assumes 95% of prob mass is between -2 and 2
@@ -66,4 +67,29 @@ def main2():
     fmcv, ify1 = ctr.most_common(1)[0]
     smcv, ify2 = ctr.most_common(2)[1]
     tmcv, ify3 = ctr.most_common(3)[2]
-    return(df_special[0],df_special[1],fmcv,ify1,smcv,ify2,tmcv,ify3)
+
+    dict1 = dict()
+    dict2 = dict()
+    dict3 = dict()
+
+    dict1['latitude'] = df_special[0][fmcv]
+    dict1['longitude'] = df_special[1][fmcv]
+    dict1['risk'] = ify1
+    dict1['start_prediction_time'] = dt.datetime.now()
+
+    dict2['latitude'] = df_special[0][smcv]
+    dict2['longitude'] = df_special[1][smcv]
+    dict2['risk'] = ify2
+    dict2['start_prediction_time'] = dt.datetime.now()
+
+    dict3['latitude'] = df_special[0][tmcv]
+    dict3['longitude'] = df_special[1][tmcv]
+    dict3['risk'] = ify3
+    dict3['start_prediction_time'] = dt.datetime.now()
+
+    list1 = []
+    list1.append(dict1)
+    list1.append(dict2)
+    list1.append(dict3)
+
+    return list1
