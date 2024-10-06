@@ -24,3 +24,69 @@ starlette==0.38.6
 typing_extensions==4.12.2
 urllib3==2.2.3
 uvicorn==0.31.0
+
+
+arviz @ file:///home/conda/feedstock_root/build_artifacts/arviz_1721464077804/work
+asttokens==2.4.1
+cached-property @ file:///home/conda/feedstock_root/build_artifacts/cached_property_1615209429212/work
+cachetools @ file:///home/conda/feedstock_root/build_artifacts/cachetools_1724028158384/work
+certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1725278078093/work/certifi
+cloudpickle @ file:///home/conda/feedstock_root/build_artifacts/cloudpickle_1697464713350/work
+cons @ file:///home/conda/feedstock_root/build_artifacts/cons_1687647735347/work
+contourpy @ file:///home/conda/feedstock_root/build_artifacts/contourpy_1725378328697/work
+cycler @ file:///home/conda/feedstock_root/build_artifacts/cycler_1696677705766/work
+decorator==5.1.1
+dm-tree @ file:///home/conda/feedstock_root/build_artifacts/dm-tree_1725380686691/work
+etuples @ file:///home/conda/feedstock_root/build_artifacts/etuples_1684304238995/work
+executing==2.1.0
+filelock @ file:///home/conda/feedstock_root/build_artifacts/filelock_1719088281970/work
+fonttools @ file:///home/conda/feedstock_root/build_artifacts/fonttools_1725391243723/work
+graphviz @ file:///home/conda/feedstock_root/build_artifacts/python-graphviz_1711016462626/work
+h5netcdf @ file:///home/conda/feedstock_root/build_artifacts/h5netcdf_1699412745362/work
+h5py @ file:///home/conda/feedstock_root/build_artifacts/h5py_1717664849471/work
+ipython==8.27.0
+jedi==0.19.1
+joblib==1.4.2
+kiwisolver @ file:///home/conda/feedstock_root/build_artifacts/kiwisolver_1725459266942/work
+logical-unification @ file:///home/conda/feedstock_root/build_artifacts/logical-unification_1683416429744/work
+markdown-it-py @ file:///home/conda/feedstock_root/build_artifacts/markdown-it-py_1686175045316/work
+matplotlib==3.9.2
+matplotlib-inline==0.1.7
+mdurl @ file:///home/conda/feedstock_root/build_artifacts/mdurl_1704317613764/work
+miniKanren @ file:///home/conda/feedstock_root/build_artifacts/minikanren_1642650904995/work
+mlxtend==0.23.1
+multipledispatch @ file:///home/conda/feedstock_root/build_artifacts/multipledispatch_1721907546485/work
+munkres==1.1.4
+numpy @ file:///home/conda/feedstock_root/build_artifacts/numpy_1707225359967/work/dist/numpy-1.26.4-cp312-cp312-linux_x86_64.whl#sha256=031b7d6b2e5e604d9e21fc21be713ebf28ce133ec872dce6de006742d5e49bab
+packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1718189413536/work
+pandas @ file:///home/conda/feedstock_root/build_artifacts/pandas_1715897630316/work
+parso==0.8.4
+patsy==0.5.6
+pexpect==4.9.0
+pillow @ file:///home/conda/feedstock_root/build_artifacts/pillow_1719903548521/work
+prompt_toolkit==3.0.47
+ptyprocess==0.7.0
+pure_eval==0.2.3
+Pygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1714846767233/work
+pymc @ file:///home/conda/feedstock_root/build_artifacts/pymc-suite_1720728635349/work
+pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1724616129934/work
+pytensor @ file:///croot/pytensor_1720794799722/work
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1709299778482/work
+pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1706886791323/work
+rich @ file:///home/conda/feedstock_root/build_artifacts/rich-split_1709150387247/work/dist
+scikit-learn==1.5.1
+scipy @ file:///home/conda/feedstock_root/build_artifacts/scipy-split_1724327061663/work/dist/scipy-1.14.1-cp312-cp312-linux_x86_64.whl#sha256=273d4a0dca8845537bb3b7a02f60b5c84296e444f352aff32292ded3941d0b0f
+seaborn==0.13.2
+setuptools==73.0.1
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+stack-data==0.6.3
+statsmodels==0.14.2
+threadpoolctl @ file:///home/conda/feedstock_root/build_artifacts/threadpoolctl_1714400101435/work
+toolz @ file:///home/conda/feedstock_root/build_artifacts/toolz_1706112571092/work
+traitlets==5.14.3
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1717802530399/work
+tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1707747584337/work
+wcwidth==0.2.13
+wheel==0.44.0
+xarray @ file:///home/conda/feedstock_root/build_artifacts/xarray_1722348170975/work
+xarray-einstats @ file:///home/conda/feedstock_root/build_artifacts/xarray-einstats_1705619231707/work
