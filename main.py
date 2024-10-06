@@ -31,7 +31,7 @@ import matplotlib.cm as cm
 import seaborn as sns
 RANDOM_SEED=42
 data=np.load('data.npy')
-df = pd.DataFrame(data)
+df_special = pd.DataFrame(data)
 with pm.Model() as ar1:
     # assumes 95% of prob mass is between -2 and 2
     rho = pm.Normal("rho", mu=0.0, sigma=1.0, shape=2)
@@ -39,7 +39,7 @@ with pm.Model() as ar1:
     tau = pm.Exponential("tau", lam=0.5)
 
     likelihood = pm.AR(
-        "y", rho=rho, tau=tau, constant=True, init_dist=pm.Normal.dist(0, 10), observed=df[2]
+        "y", rho=rho, tau=tau, constant=True, init_dist=pm.Normal.dist(0, 10), observed=df_special[2]
     )
 
     idata = pm.sample(1000, tune=2000, random_seed=RANDOM_SEED)
@@ -47,4 +47,22 @@ with pm.Model() as ar1:
 with ar1:
     predictions = pm.sample_posterior_predictive(idata, predictions=True).predictions
 
+print(predictions.y[0])
 np.savetxt('sample.csv',predictions.y[0],delimiter=",")
+
+import numpy as np
+from collections import Counter
+df=pd.read_csv("sample.csv")
+temp= list(df.columns)
+df=df = df.T.reset_index(drop=True).T
+df1 = pd.concat([pd.DataFrame(data=[temp]),df],ignore_index=True)
+stat=[]
+for i in range(0,df1.shape[1]):
+    stat.append( df[i].lt(0).idxmax())
+
+array=np.array(stat)
+ctr=Counter(array)
+fmcv, ify1 = ctr.most_common(1)[0]
+smcv, ify2 = ctr.most_common(2)[1]
+tmcv, ify3 = ctr.most_common(3)[2]
+print(df_special[0],df_special[1],fmcv,ify1,smcv,ify2,tmcv,ify3)
