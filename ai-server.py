@@ -1,24 +1,26 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, BackgroundTasks
 import s3utils
 from dbutils import engineconn
 from db_models import LearningResult
 from sqlalchemy.orm import Session
 import main
 from geopy.geocoders import Nominatim
+from fastapi import status
+from fastapi import Response
 
 app = FastAPI()
 engine_conn = engineconn()
 
 @app.get("/simulation-data")
-def learning(path : str):
+def learning(path : str, background_tasks: BackgroundTasks):
     download_path = s3utils.download_csv(path) # ai_input.npy로 다운받은 상태.
     print(download_path)
 
     # 다운받은 csv파일의 경로 매개변수, 실제로 학습하는 함수
     # learning_res는 ai.output.csv 문자열
-    start_learning(download_path) 
+    background_tasks.add_task(start_learning, download_path) 
 
-    return 'success'
+    return Response(status_code=status.HTTP_200_OK)
 
 
 def start_learning(ai_input_data):
@@ -36,9 +38,10 @@ def start_learning(ai_input_data):
         
         latitude=tmp_dict["latitude"]
         longitude=tmp_dict["longitude"]
-        print('latitude = ' + latitude + ' longitude : ' + longitude)
+        print('latitude = {} longitude : {}'.format(latitude, longitude))
+
         district = get_administrative_district(latitude, longitude)
-        print(district)
+        print('district = {}'.format(district))
 
         # LearningResult 객체 생성
         learning_result = LearningResult(
@@ -57,8 +60,8 @@ def get_administrative_district(lat, lng):
     print('convert to district start')
     geolocoder = Nominatim(user_agent = 'South Korea', timeout=None)
     res = geolocoder.reverse([lat, lng], exactly_one=True, language='ko')
-    print(res)
-    print(res.address)
+    print('res = {}'.format(res))
+    print('res.address = {}'.format(res.address))
     return res.address
 
 
