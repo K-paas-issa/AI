@@ -85,7 +85,7 @@ def main2(ai_input_data):
     list1.append(dict1)
     list1.append(dict2)
 
-    if (ctr.most_common >= 3):
+    if (ctr.most_common(3) >= 3):
         tmcv, ify3 = ctr.most_common(3)[2]
         dict3 = dict()
         dict3['latitude'] = df_special[0][tmcv]
