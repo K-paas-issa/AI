@@ -29,6 +29,20 @@ spec:
                 secretKeyRef:
                   name: server-secret
                   key: ncp-secret-key
+            - name: MYSQL_HOST
+              value: "default-my-mysql-service-790b6-26292068-46a4f0920895.kr.lb.naverncp.com"
+            - name: MYSQL_PORT
+              value: "13006"
+            - name: MYSQL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
       imagePullSecrets:
         - name: regcred
 
