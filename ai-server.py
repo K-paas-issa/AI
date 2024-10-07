@@ -27,8 +27,9 @@ def start_learning(ai_input_data):
 # TODO : 실제 학습 부분 구현
 # 여기서 학습 결과로 나온 csv파일 ai_output.csv로 저장할 것
     
+    print('main call')
     res_list = main.main2(ai_input_data)
-    
+    print('main call end')
     # 각 객체 생성 및 db 저장
     for i in range(3):
         tmp_dict = res_list[i]
@@ -52,6 +53,7 @@ def start_learning(ai_input_data):
     return
 
 def get_administrative_district(lat, lng):
+    print('convert to district start')
     geolocoder = Nominatim(user_agent = 'South Korea', timeout=None)
     res = geolocoder.reverse([lat, lng], exactly_one=True, language='ko')
 
@@ -60,6 +62,7 @@ def get_administrative_district(lat, lng):
 
 def save_learning_result(data: LearningResult):
     # DB 세션 생성
+    print('save start')
     session: Session = engine_conn.get_session()
     
     try:

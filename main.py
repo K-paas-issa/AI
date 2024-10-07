@@ -33,6 +33,7 @@ import seaborn as sns
 from collections import Counter
 import numpy as np
 def main2(ai_input_data):
+    print('main start')
     RANDOM_SEED=42
     data=np.load(ai_input_data)
     df_special = pd.DataFrame(data)
@@ -91,5 +92,7 @@ def main2(ai_input_data):
     list1.append(dict1)
     list1.append(dict2)
     list1.append(dict3)
+
+    print('main end')
 
     return list1
