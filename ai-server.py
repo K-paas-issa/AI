@@ -31,13 +31,15 @@ def start_learning(ai_input_data):
     res_list = main.main2(ai_input_data)
     print('main call end')
     # 각 객체 생성 및 db 저장
+    print('res_list = ' + res_list)
     for i in range(3):
         tmp_dict = res_list[i]
-
+        
         latitude=tmp_dict["latitude"]
         longitude=tmp_dict["longitude"]
-
+        print('latitude = ' + latitude + ' longitude : ' + longitude)
         district = get_administrative_district(latitude, longitude)
+        print(district)
 
         # LearningResult 객체 생성
         learning_result = LearningResult(
@@ -45,7 +47,7 @@ def start_learning(ai_input_data):
             longitude,
             district,
             risk=tmp_dict["risk"],
-            start_prediction=tmp_dict["start_prediction_time"]
+            start_prediction_time=tmp_dict["start_prediction_time"]
         )
         
         save_learning_result(learning_result)
@@ -56,7 +58,8 @@ def get_administrative_district(lat, lng):
     print('convert to district start')
     geolocoder = Nominatim(user_agent = 'South Korea', timeout=None)
     res = geolocoder.reverse([lat, lng], exactly_one=True, language='ko')
-
+    print(res)
+    print(res.address)
     return res.address
 
 

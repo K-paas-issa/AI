@@ -94,6 +94,10 @@ def main2(ai_input_data):
         dict3['longitude'] = df_special[1][tmcv]
         dict3['risk'] = ify3
         dict3['start_prediction_time'] = dt.datetime.now()
+        
+        print(dict1)
+        print(dict2)
+        print(dict3)
 
         list1 = []
         list1.append(dict1)
