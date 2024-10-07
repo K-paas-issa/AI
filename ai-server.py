@@ -10,8 +10,8 @@ app = FastAPI()
 engine_conn = engineconn()
 
 @app.get("/simulation-data")
-def learning(simulation_data : str):
-    download_path = s3utils.download_csv(simulation_data) # ai_input.npy로 다운받은 상태.
+def learning(path : str):
+    download_path = s3utils.download_csv(path) # ai_input.npy로 다운받은 상태.
     print(download_path)
 
     # 다운받은 csv파일의 경로 매개변수, 실제로 학습하는 함수
