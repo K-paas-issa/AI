@@ -100,9 +100,7 @@ def main2(ai_input_data):
         print(dict3)
 
         list1 = []
-        list1.append(dict1)
-        list1.append(dict2)
-        list1.append(dict3)
+        list1.extend([dict1, dict2, dict3])
     
     except Exception as e:
         print(f"exception throws: {e}")

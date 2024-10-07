@@ -31,7 +31,6 @@ def start_learning(ai_input_data):
     res_list = main.main2(ai_input_data)
     print('main call end')
     # 각 객체 생성 및 db 저장
-    print('res_list = ' + res_list)
     for i in range(3):
         tmp_dict = res_list[i]
         
