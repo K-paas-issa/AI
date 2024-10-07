@@ -67,12 +67,10 @@ def main2(ai_input_data):
     ctr=Counter(array)
     fmcv, ify1 = ctr.most_common(1)[0]
     smcv, ify2 = ctr.most_common(2)[1]
-    tmcv, ify3 = ctr.most_common(3)[2]
-
+    
     dict1 = dict()
     dict2 = dict()
-    dict3 = dict()
-
+    
     dict1['latitude'] = df_special[0][fmcv]
     dict1['longitude'] = df_special[1][fmcv]
     dict1['risk'] = ify1
@@ -83,15 +81,19 @@ def main2(ai_input_data):
     dict2['risk'] = ify2
     dict2['start_prediction_time'] = dt.datetime.now()
 
-    dict3['latitude'] = df_special[0][tmcv]
-    dict3['longitude'] = df_special[1][tmcv]
-    dict3['risk'] = ify3
-    dict3['start_prediction_time'] = dt.datetime.now()
-
     list1 = []
     list1.append(dict1)
     list1.append(dict2)
-    list1.append(dict3)
+
+    if (ctr.most_common >= 3):
+        tmcv, ify3 = ctr.most_common(3)[2]
+        dict3 = dict()
+        dict3['latitude'] = df_special[0][tmcv]
+        dict3['longitude'] = df_special[1][tmcv]
+        dict3['risk'] = ify3
+        dict3['start_prediction_time'] = dt.datetime.now()
+        list1.append(dict3)
+
 
     print('main end')
 
