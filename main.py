@@ -107,5 +107,5 @@ def main2(ai_input_data):
         print(f"exception throws: {e}")
         
     print('main end')
-
+    print('in main ', list1)
     return list1

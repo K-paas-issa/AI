@@ -7,6 +7,7 @@ import main
 from geopy.geocoders import Nominatim
 from fastapi import status
 from fastapi import Response
+import math
 
 app = FastAPI()
 engine_conn = engineconn()
@@ -33,6 +34,7 @@ def start_learning(ai_input_data):
     
     print('main call')
     res_list = main.main2(ai_input_data)
+    print('in ai-server ', res_list)
     print('main call end')
     # 각 객체 생성 및 db 저장
     for i in range(3):
@@ -42,14 +44,14 @@ def start_learning(ai_input_data):
         longitude=tmp_dict["longitude"]
         print('latitude = {} longitude : {}'.format(latitude, longitude))
 
-        # district = get_administrative_district(latitude, longitude)
-        # print('district = {}'.format(district))
+        district = get_administrative_district(latitude, longitude)
+        print('district = {}'.format(district))
 
         # LearningResult 객체 생성
         learning_result = LearningResult(
             latitude,
             longitude,
-            'district',
+            district,
             risk=tmp_dict["risk"],
             start_prediction_time=tmp_dict["start_prediction_time"]
         )
@@ -58,32 +60,30 @@ def start_learning(ai_input_data):
 
     return
 
-# def get_administrative_district(lat, lng):
-#     print('convert to district start')
+def get_administrative_district(lat, lng):
+    print('convert to district start')
     
-#     after_lat, after_lng = calculate_new_position(lat, lng) # 변환 후 위경도
+    after_lat, after_lng = calculate_new_position(lat, lng) # 변환 후 위경도
 
-#     geolocoder = Nominatim(user_agent = 'South Korea', timeout=None)
-#     res = geolocoder.reverse([lat, lng], exactly_one=True, language='ko')
-#     print('res = {}'.format(res))
-#     print('res.address = {}'.format(res.address))
-#     return res.address
+    geolocoder = Nominatim(user_agent = 'South Korea', timeout=None)
+    res = geolocoder.reverse([lat, lng], exactly_one=True, language='ko')
+    print('res = {}'.format(res))
+    print('res.address = {}'.format(res.address))
+    return res.address
 
-# import math
+def calculate_new_position(variable_latitude_km, variable_longitude_km):
+    # 지구의 반지름 (킬로미터)
+    R = 6371.0
 
-# def calculate_new_position(variable_latitude_km, variable_longitude_km):
-#     # 지구의 반지름 (킬로미터)
-#     R = 6371.0
+    # 위도 이동 (남북)
+    delta_lat = variable_latitude_km / R
+    new_lat = start_latitude + math.degrees(delta_lat)
 
-#     # 위도 이동 (남북)
-#     delta_lat = variable_latitude_km / R
-#     new_lat = start_latitude + math.degrees(delta_lat)
+    # 경도 이동 (동서)
+    delta_lon = variable_longitude_km / (R * math.cos(math.radians(start_latitude)))
+    new_lon = start_longitude + math.degrees(delta_lon)
 
-#     # 경도 이동 (동서)
-#     delta_lon = variable_longitude_km / (R * math.cos(math.radians(start_latitude)))
-#     new_lon = start_longitude + math.degrees(delta_lon)
-
-#     return new_lat, new_lon
+    return new_lat, new_lon
 
 
 
