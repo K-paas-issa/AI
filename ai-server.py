@@ -1,8 +1,9 @@
 from fastapi import FastAPI, BackgroundTasks
 import s3utils
 from dbutils import engineconn
-from db_models import LearningResult
+from db_models import LearningResult, CityDistrict
 from sqlalchemy.orm import Session
+from sqlalchemy import and_
 import main
 from geopy.geocoders import Nominatim
 from fastapi import status
@@ -43,15 +44,25 @@ def start_learning(ai_input_data):
         latitude=tmp_dict["latitude"]
         longitude=tmp_dict["longitude"]
         print('latitude = {} longitude : {}'.format(latitude, longitude))
+            
+        after_lat, after_lng = calculate_new_position(latitude, longitude) # 변환 후 위경도
 
-        district = get_administrative_district(latitude, longitude)
-        print('district = {}'.format(district))
+        district = get_administrative_district(after_lat, after_lng)
+
+        if district == None:
+            district_code = None
+        else:
+            district_arr = district.split(',')
+            district_code = get_district_code(district_arr)
+            print(district_code)
+            print('district = {}'.format(district))
 
         # LearningResult 객체 생성
         learning_result = LearningResult(
-            latitude,
-            longitude,
+            after_lat,
+            after_lng,
             district,
+            district_code,
             risk=tmp_dict["risk"],
             start_prediction_time=tmp_dict["start_prediction_time"]
         )
@@ -60,15 +71,61 @@ def start_learning(ai_input_data):
 
     return
 
+def get_district_code(district_arr):
+
+    session: Session = engine_conn.get_session()
+    try:
+        # Check the length of district_arr
+        if len(district_arr) < 4:
+            return None
+        
+        # 세종특별자치시의 경우
+        print(district_arr[-3])
+        results = session.query(CityDistrict).filter(
+            CityDistrict.city.like(f"%{district_arr[-3].strip()}%")
+        ).all()
+        if len(results) == 1:
+            return results[0].code
+        
+        # 부산동, 오산시, 18132, 대한민국과 같은 경우
+        results = session.query(CityDistrict).filter(CityDistrict.district.like(f"%{district_arr[-3].strip()}%")).all()
+        if len(results) == 1:
+            return results[0].code
+        
+        # 설악로, 임천리, 양양군, 강원특별자치도, 25035, 대한민국의 경우
+        results = session.query(CityDistrict).filter(
+            and_(
+                CityDistrict.city.like(f"%{district_arr[-3].strip()}%"),
+                CityDistrict.district.like(f"%{district_arr[-4].strip()}%"),
+            )
+        ).all()
+        if len(results) == 1:
+            return results[0].code
+        
+        # 전주시청, 기린대로, 서노송동, 완산구, 전주시, 전북특별자치도, 55032, 대한민국의 경우
+        results = session.query(CityDistrict).filter(
+            and_(
+                CityDistrict.city.like(f"%{district_arr[-3].strip()}%"),
+                CityDistrict.district.like(f"%{district_arr[-4].strip()}%"),
+                CityDistrict.district.like(f"%{district_arr[-5].strip()}%")
+            )
+        ).all()
+        if len(results) == 1:
+            return results[0].code
+        
+        return None
+    finally:
+        print('save data end')
+        session.close()
+
 def get_administrative_district(lat, lng):
     print('convert to district start')
-    
-    after_lat, after_lng = calculate_new_position(lat, lng) # 변환 후 위경도
 
     geolocoder = Nominatim(user_agent = 'South Korea', timeout=None)
     res = geolocoder.reverse([lat, lng], exactly_one=True, language='ko')
+    if res==None:
+        return None
     print('res = {}'.format(res))
-    print('res.address = {}'.format(res.address))
     return res.address
 
 def calculate_new_position(variable_latitude_km, variable_longitude_km):
