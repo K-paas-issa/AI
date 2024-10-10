@@ -79,6 +79,13 @@ def get_district_code(district_arr):
 
     session: Session = engine_conn.get_session()
     try:
+        # 대한민국이 아닐경우
+        results = session.query(CityDistrict).filter(
+            CityDistrict.city.like(f"%{district_arr[-1].strip()}%")
+        ).all()
+        if results == None:
+            return None
+        
         # Check the length of district_arr
         if len(district_arr) < 4:
             return None
