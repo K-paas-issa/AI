@@ -61,14 +61,19 @@ def main2(ai_input_data):
         df=pd.read_csv("sample.csv")
         print('save sample.csv read')
         temp= list(df.columns)
+        print('after temp=list(df.columns)')
         df = df.T.reset_index(drop=True).T
+        print('after df = df.T.reset_index(drop=True).T')
         df1 = pd.concat([pd.DataFrame(data=[temp]),df],ignore_index=True)
+        print('after df1 = pd.concat([pd.DataFrame(data=[temp]),df],ignore_index=True)')
         stat=[]
         for i in range(0,df1.shape[1]):
             stat.append( df[i].lt(0).idxmax())
-
+        print('after for i in range(0,df1.shape[1]):')
         array=np.array(stat)
+        print('after array=np.array(stat)')
         ctr=Counter(array)
+        print('ctr=Counter(array)')
         fmcv, ify1 = ctr.most_common(1)[0]
         smcv, ify2 = ctr.most_common(2)[1]
         print('third most common condition start')
