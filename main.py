@@ -34,6 +34,7 @@ from collections import Counter
 import numpy as np
 def main2(ai_input_data):
     print('main start')
+    list1 = []
     try:
         RANDOM_SEED=42
         data=np.load(ai_input_data)
@@ -99,7 +100,7 @@ def main2(ai_input_data):
         print('dict2 = {}'.format(dict2))
         print('dict3 = {}'.format(dict3))
 
-        list1 = []
+        
         list1.extend([dict1, dict2, dict3])
     
     except Exception as e:
