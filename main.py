@@ -53,6 +53,7 @@ def main2(ai_input_data):
         print('sample 1000, 2000 end')
         with ar1:
             predictions = pm.sample_posterior_predictive(idata, predictions=True).predictions
+            print(f'Predictions: {predictions}')
 
     #print(predictions.y[0])
         print('save sample.csv start')
@@ -69,6 +70,7 @@ def main2(ai_input_data):
 
         array=np.array(stat)
         ctr=Counter(array)
+        print(f'Counter results: {ctr}')  # Counter 결과 확인
         fmcv, ify1 = ctr.most_common(1)[0]
         smcv, ify2 = ctr.most_common(2)[1]
         print('third most common condition start')
@@ -104,8 +106,10 @@ def main2(ai_input_data):
         list1.extend([dict1, dict2, dict3])
     
     except Exception as e:
+        print('Final list1 exception:', list1)
         print(f"exception throws: {e}")
         
     print('main end')
     print('in main ', list1)
+    print('Final list1 before return:', list1)
     return list1
