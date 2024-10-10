@@ -37,6 +37,10 @@ def start_learning(ai_input_data):
     res_list = main.main2(ai_input_data)
     print('in ai-server ', res_list)
     print('main call end')
+    if len(res_list) != 3:
+        print('res list size : ', len(res_list))
+        return
+    
     # 각 객체 생성 및 db 저장
     for i in range(3):
         tmp_dict = res_list[i]
