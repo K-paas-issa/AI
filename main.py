@@ -76,7 +76,14 @@ def main2(ai_input_data):
         print('ctr=Counter(array)')
         if (len(ctr.most_common(1)) >= 1):
             print(ctr.most_common(1)[0])
-            fmcv, ify1 = ctr.most_common(1)[0]      
+            fmcv, ify1 = ctr.most_common(1)[0]
+            dict1 = dict()
+            dict1['latitude'] = df_special[0][fmcv]
+            dict1['longitude'] = df_special[1][fmcv]
+            dict1['risk'] = ify1
+            dict1['start_prediction_time'] = dt.datetime.now()
+            print('dict1 = {}'.format(dict1))
+            list1.append(dict1)
         else:
             print('len(ctr.most_common(1)) < 1')
             return None
@@ -84,45 +91,31 @@ def main2(ai_input_data):
         if (len(ctr.most_common(2)) >= 2):
             print(ctr.most_common(2)[1])
             smcv, ify2 = ctr.most_common(2)[1]
+            dict2 = dict()
+            dict2['latitude'] = df_special[0][smcv]
+            dict2['longitude'] = df_special[1][smcv]
+            dict2['risk'] = ify2
+            dict2['start_prediction_time'] = dt.datetime.now()
+            print('dict2 = {}'.format(dict2))
+            list1.append(dict2)
         else:
             print('len(ctr.most_common(2)) < 2')
-            return None
 
         if (len(ctr.most_common(3)) >= 3):
             print(ctr.most_common(3)[2])
             tmcv, ify3 = ctr.most_common(3)[2]
+            dict3 = dict()
+            dict3['latitude'] = df_special[0][tmcv]
+            dict3['longitude'] = df_special[1][tmcv]
+            dict3['risk'] = ify3
+            dict3['start_prediction_time'] = dt.datetime.now()
+            print('dict3 = {}'.format(dict3))
+            list1.append(dict3)
         else:
             print('len(ctr.most_common(3)) < 3')
-            tmcv, ify3 = 0, 0
                   
         print('most common condition end')
 
-        dict1 = dict()
-        dict2 = dict()
-        dict3 = dict()
-        
-        dict1['latitude'] = df_special[0][fmcv]
-        dict1['longitude'] = df_special[1][fmcv]
-        dict1['risk'] = ify1
-        dict1['start_prediction_time'] = dt.datetime.now()
-
-        dict2['latitude'] = df_special[0][smcv]
-        dict2['longitude'] = df_special[1][smcv]
-        dict2['risk'] = ify2
-        dict2['start_prediction_time'] = dt.datetime.now()
-
-        dict3['latitude'] = df_special[0][tmcv]
-        dict3['longitude'] = df_special[1][tmcv]
-        dict3['risk'] = ify3
-        dict3['start_prediction_time'] = dt.datetime.now()
-        
-        print('dict1 = {}'.format(dict1))
-        print('dict2 = {}'.format(dict2))
-        print('dict3 = {}'.format(dict3))
-
-        
-        list1.extend([dict1, dict2, dict3])
-    
     except Exception as e:
         print('Final list1 exception:', list1)
         print(f"exception throws: {e}")

@@ -42,10 +42,9 @@ def start_learning(ai_input_data):
     print('main call end')
     if len(res_list) != 3:
         print('res list size : ', len(res_list))
-        return
     
     # 각 객체 생성 및 db 저장
-    for i in range(3):
+    for i in range(len(res_list)):
         tmp_dict = res_list[i]
         
         latitude=tmp_dict["latitude"]
