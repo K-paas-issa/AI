@@ -86,7 +86,7 @@ def get_district_code(district_arr):
         results = session.query(CityDistrict).filter(
             CityDistrict.city.like(f"%{district_arr[-1].strip()}%")
         ).all()
-        if results == None:
+        if not results:
             return None
         
         # Check the length of district_arr
