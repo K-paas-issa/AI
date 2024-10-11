@@ -59,6 +59,10 @@ def start_learning(ai_input_data):
             district_code = None
         else:
             district_arr = district.split(',')
+
+            if not isInKorea(district_arr):
+                continue
+            
             district_code = get_district_code(district_arr)
             print(district_code)
             print('district = {}'.format(district))
@@ -77,8 +81,7 @@ def start_learning(ai_input_data):
 
     return
 
-def get_district_code(district_arr):
-
+def isInKorea(district_arr):
     session: Session = engine_conn.get_session()
     try:
         # 대한민국이 아닐경우
@@ -86,7 +89,15 @@ def get_district_code(district_arr):
             CityDistrict.city.like(f"%{district_arr[-1].strip()}%")
         ).all()
         if not results:
-            return None
+            return False
+        return True
+    finally:
+        session.close()
+
+def get_district_code(district_arr):
+
+    session: Session = engine_conn.get_session()
+    try:
         
         # Check the length of district_arr
         if len(district_arr) < 4:

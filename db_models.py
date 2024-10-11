@@ -12,6 +12,8 @@ class LearningResult(Base):
     administrative_district = Column(String(100), nullable=False)
     district_code = Column(String(15), nullable=False)
     risk = Column(DOUBLE, nullable=False)
+    report_count = Column(INT, default=0, nullable=False)
+    status = Column(String(20), default='미처리', nullable=False)
     start_prediction_time = Column(DATETIME(6), nullable=False)
 
     def __init__(self, latitude, longitude, administrative_district, district_code, risk, start_prediction_time):
