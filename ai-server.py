@@ -32,9 +32,12 @@ def start_learning(ai_input_data):
 # 실제 학습이 진행되는 함수
 # TODO : 실제 학습 부분 구현
 # 여기서 학습 결과로 나온 csv파일 ai_output.csv로 저장할 것
-    
     print('main call')
     res_list = main.main2(ai_input_data)
+    if res_list == None or res_list == []:
+        print('rl fault')
+        return
+    
     print('in ai-server ', res_list)
     print('main call end')
     if len(res_list) != 3:
