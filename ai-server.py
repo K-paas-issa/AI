@@ -58,6 +58,7 @@ def start_learning(ai_input_data):
         if district == None:
             district_code = None
         else:
+            print('district = {}'.format(district))
             district_arr = district.split(',')
 
             if not isInKorea(district_arr):
@@ -65,7 +66,7 @@ def start_learning(ai_input_data):
             
             district_code = get_district_code(district_arr)
             print(district_code)
-            print('district = {}'.format(district))
+            
 
         # LearningResult 객체 생성
         learning_result = LearningResult(
