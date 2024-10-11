@@ -74,22 +74,26 @@ def main2(ai_input_data):
         print('after array=np.array(stat)')
         ctr=Counter(array)
         print('ctr=Counter(array)')
-        if (len(ctr.most_common(1)) < 1):
+        if (len(ctr.most_common(1)) >= 1):
+            print(ctr.most_common(1)[0])
+            fmcv, ify1 = ctr.most_common(1)[0]      
+        else:
             print('len(ctr.most_common(1)) < 1')
             return None
+
+        if (len(ctr.most_common(2)) >= 2):
+            print(ctr.most_common(2)[1])
+            smcv, ify2 = ctr.most_common(2)[1]
         else:
-            fmcv, ify1 = ctr.most_common(1)[0]
-        if (len(ctr.most_common(2)) < 2):
             print('len(ctr.most_common(2)) < 2')
             return None
-        else:
-            smcv, ify2 = ctr.most_common(2)[1]
 
-        if (len(ctr.most_common(3)) < 3):
+        if (len(ctr.most_common(3)) >= 3):
+            print(ctr.most_common(3)[2])
+            tmcv, ify3 = ctr.most_common(3)[2]
+        else:
             print('len(ctr.most_common(3)) < 3')
             tmcv, ify3 = 0, 0
-        else:
-            tmcv, ify3 = ctr.most_common(3)[2]
                   
         print('most common condition end')
 
