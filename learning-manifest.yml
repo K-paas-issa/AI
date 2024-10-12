@@ -58,4 +58,3 @@ spec:
     - protocol: TCP
       port: 8002
       targetPort: 8002
-  type: LoadBalancer  # 개발단계이므로 외부 포트 허용
