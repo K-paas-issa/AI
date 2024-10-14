@@ -132,6 +132,8 @@ def get_district_code(district_arr):
             return results[0].code
         
         return None
+    except Exception as e:
+        print(f"쿼리 실행 중 오류 발생: {e}")
     finally:
         print('save data end')
         session.close()
