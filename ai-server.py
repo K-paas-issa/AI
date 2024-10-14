@@ -67,6 +67,8 @@ def start_learning(ai_input_data):
             district_code = get_district_code(district_arr)
             print(district_code)
             
+        if district_code == None:
+            continue
 
         # LearningResult 객체 생성
         learning_result = LearningResult(
