@@ -83,17 +83,10 @@ def start_learning(ai_input_data):
     return
 
 def isInKorea(district_arr):
-    session: Session = engine_conn.get_session()
-    try:
-        # 대한민국이 아닐경우
-        results = session.query(CityDistrict).filter(
-            CityDistrict.country.like(f"%{district_arr[-1].strip()}%")
-        ).all()
-        if not results:
-            return False
-        return True
-    finally:
-        session.close()
+    if district_arr[-1].strip() != '대한민국':
+        return False
+    return True
+        
 
 def get_district_code(district_arr):
 
