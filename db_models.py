@@ -31,8 +31,10 @@ class CityDistrict(Base):
     code = Column(String(15), nullable=False, unique=True)
     city = Column(String(10), nullable=False)
     district = Column(String(20), nullable=False)
+    country = Column(String(20), nullable=False)
 
-    def __init__(self, code, city, district):
+    def __init__(self, code, city, district, country):
         self.code = code
         self.city = city
         self.district = district
+        self.country = country

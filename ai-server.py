@@ -87,7 +87,7 @@ def isInKorea(district_arr):
     try:
         # 대한민국이 아닐경우
         results = session.query(CityDistrict).filter(
-            CityDistrict.city.like(f"%{district_arr[-1].strip()}%")
+            CityDistrict.country.like(f"%{district_arr[-1].strip()}%")
         ).all()
         if not results:
             return False
