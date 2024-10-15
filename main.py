@@ -80,7 +80,9 @@ def main2(ai_input_data):
             dict1 = dict()
             dict1['latitude'] = df_special[0][fmcv]
             dict1['longitude'] = df_special[1][fmcv]
-            dict1['risk'] = ify1
+            dict1['risk'] = ify1//2
+            if ify1//2>=100:
+                dict1['risk'] = 100
             dict1['start_prediction_time'] = dt.datetime.now()
             print('dict1 = {}'.format(dict1))
             list1.append(dict1)
@@ -94,7 +96,9 @@ def main2(ai_input_data):
             dict2 = dict()
             dict2['latitude'] = df_special[0][smcv]
             dict2['longitude'] = df_special[1][smcv]
-            dict2['risk'] = ify2
+            dict2['risk'] = ify2//2
+            if ify2//2>=100:
+                dict2['risk'] = 100
             dict2['start_prediction_time'] = dt.datetime.now()
             print('dict2 = {}'.format(dict2))
             list1.append(dict2)
@@ -107,7 +111,9 @@ def main2(ai_input_data):
             dict3 = dict()
             dict3['latitude'] = df_special[0][tmcv]
             dict3['longitude'] = df_special[1][tmcv]
-            dict3['risk'] = ify3
+            dict3['risk'] = ify3//10
+            if ify3//2>=100:
+                dict3['risk'] = 100
             dict3['start_prediction_time'] = dt.datetime.now()
             print('dict3 = {}'.format(dict3))
             list1.append(dict3)
