@@ -67,7 +67,7 @@ def start_learning(ai_input_data):
             district_code = get_district_code(district_arr)
             print(district_code)
 
-            district = arrange_district(district_arr)
+            district = rearrange_district(district_arr)
             
         if district == None or district_code == None:
             continue
@@ -85,7 +85,7 @@ def start_learning(ai_input_data):
         save_learning_result(learning_result)
 
     return
-def arrange_district(district_arr):
+def rearrange_district(district_arr):
     filtered_words = [word.strip() for word in district_arr if not word.strip().isdigit()]
     reversed_words = filtered_words[::-1]
     res_string = ' '.join(reversed_words)
