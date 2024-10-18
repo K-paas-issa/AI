@@ -66,8 +66,10 @@ def start_learning(ai_input_data):
             
             district_code = get_district_code(district_arr)
             print(district_code)
+
+            district = arrange_district(district_arr)
             
-        if district_code == None:
+        if district == None or district_code == None:
             continue
 
         # LearningResult 객체 생성
@@ -83,6 +85,12 @@ def start_learning(ai_input_data):
         save_learning_result(learning_result)
 
     return
+def arrange_district(district_arr):
+    filtered_words = [word.strip() for word in district_arr if not word.strip().isdigit()]
+    reversed_words = filtered_words[::-1]
+    res_string = ' '.join(reversed_words)
+    
+    return res_string
 
 def isInKorea(district_arr):
     if district_arr[-1].strip() != '대한민국':
