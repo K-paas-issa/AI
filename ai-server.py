@@ -103,9 +103,29 @@ def get_district_code(district_arr):
     session: Session = engine_conn.get_session()
     try:
         
-        # Check the length of district_arr
-        if len(district_arr) < 4:
+        # Check the length of district_arr 단어가 2개 이하거나, 3개이면서 2번째 단어가 숫자일 경우
+        if len(district_arr) < 3 or (len(district_arr) < 4 and district_arr[-2].isdigit() == True):
             return None
+        
+        # 숫자가 없는 경우. 태안군, 충청남도, 대한민국의 경우
+        results = session.query(CityDistrict).filter(
+            and_(
+                CityDistrict.city.like(f"%{district_arr[-2].strip()}%"),
+                CityDistrict.district.like(f"%{district_arr[-3].strip()}%"),
+            )
+        ).all()
+        if len(results) == 1:
+            return results[0].code
+
+        # 숫자가 없는 경우. 일산동구, 고양시, 대한민국의 경우
+        results = session.query(CityDistrict).filter(
+            and_(
+                CityDistrict.district.like(f"%{district_arr[-2].strip()}%"),
+                CityDistrict.district.like(f"%{district_arr[-3].strip()}%"),
+            )
+        ).all()
+        if len(results) == 1:
+            return results[0].code
         
         # 세종특별자치시의 경우
         print(district_arr[-3])
@@ -129,6 +149,16 @@ def get_district_code(district_arr):
         ).all()
         if len(results) == 1:
             return results[0].code
+
+        # 풍산동, 일산동구, 고양시, 10442, 대한민국의 경우
+        results = session.query(CityDistrict).filter(
+            and_(
+                CityDistrict.district.like(f"%{district_arr[-3].strip()}%"),
+                CityDistrict.district.like(f"%{district_arr[-4].strip()}%"),
+            )
+        ).all()
+        if len(results) == 1:
+            return results[0].code
         
         # 전주시청, 기린대로, 서노송동, 완산구, 전주시, 전북특별자치도, 55032, 대한민국의 경우
         results = session.query(CityDistrict).filter(
@@ -140,6 +170,7 @@ def get_district_code(district_arr):
         ).all()
         if len(results) == 1:
             return results[0].code
+            
         
         return None
     except Exception as e:
