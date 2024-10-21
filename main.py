@@ -78,11 +78,13 @@ def main2(ai_input_data):
             print(ctr.most_common(1)[0])
             fmcv, ify1 = ctr.most_common(1)[0]
             dict1 = dict()
+            print('before latitude and longigude')
             dict1['latitude'] = df_special[0][fmcv]
             dict1['longitude'] = df_special[1][fmcv]
+            print('before risk')
             dict1['risk'] = ify1//2
             if ify1//2>=100:
-                dict1['risk'] = 100
+                dict1['risk'] = 99.9
             dict1['start_prediction_time'] = dt.datetime.now()
             print('dict1 = {}'.format(dict1))
             list1.append(dict1)
@@ -94,11 +96,13 @@ def main2(ai_input_data):
             print(ctr.most_common(2)[1])
             smcv, ify2 = ctr.most_common(2)[1]
             dict2 = dict()
+            print('before latitude and longigude')
             dict2['latitude'] = df_special[0][smcv]
             dict2['longitude'] = df_special[1][smcv]
+            print('before risk')
             dict2['risk'] = ify2//2
             if ify2//2>=100:
-                dict2['risk'] = 100
+                dict2['risk'] = 99.9
             dict2['start_prediction_time'] = dt.datetime.now()
             print('dict2 = {}'.format(dict2))
             list1.append(dict2)
@@ -109,11 +113,13 @@ def main2(ai_input_data):
             print(ctr.most_common(3)[2])
             tmcv, ify3 = ctr.most_common(3)[2]
             dict3 = dict()
+            print('before latitude and longigude')
             dict3['latitude'] = df_special[0][tmcv]
             dict3['longitude'] = df_special[1][tmcv]
-            dict3['risk'] = ify3//10
+            print('before risk')
+            dict3['risk'] = ify3//2
             if ify3//2>=100:
-                dict3['risk'] = 100
+                dict3['risk'] = 99.9
             dict3['start_prediction_time'] = dt.datetime.now()
             print('dict3 = {}'.format(dict3))
             list1.append(dict3)

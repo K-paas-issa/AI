@@ -135,6 +135,13 @@ def get_district_code(district_arr):
         if len(results) == 1:
             return results[0].code
         
+        # 양주시, 21341, 대한민국의 경우
+        results = session.query(CityDistrict).filter(
+            CityDistrict.district.like(f"%{district_arr[-3].strip()}%")
+        ).all()
+        if len(results) == 1:
+            return results[0].code
+        
         # 부산동, 오산시, 18132, 대한민국과 같은 경우
         results = session.query(CityDistrict).filter(CityDistrict.district.like(f"%{district_arr[-3].strip()}%")).all()
         if len(results) == 1:
