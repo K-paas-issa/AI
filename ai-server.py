@@ -212,8 +212,10 @@ def save_learning_result(data: LearningResult):
     
     try:
         # 데이터베이스에 추가하고 커밋
+        print('before data commit')
         session.add(data)
         session.commit()
+        print('data commit, success save')
     except Exception as e:
         session.rollback()
         print(f"Error saving to database: {e}")
