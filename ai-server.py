@@ -139,6 +139,8 @@ def get_district_code(district_arr):
         results = session.query(CityDistrict).filter(
             CityDistrict.district.like(f"%{district_arr[-3].strip()}%")
         ).all()
+        if district_arr[-3].strip() == '양주시':
+            return 41630
         if len(results) == 1:
             return results[0].code
         
